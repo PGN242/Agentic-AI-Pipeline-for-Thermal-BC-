@@ -1,0 +1,39 @@
+# Thermal Triage Pipeline — dependencies
+# Tested with Python 3.12 (CPU-only; no CUDA required).
+# Install with:  pip install -r requirements.txt
+#
+# The line below points pip at PyTorch's CPU-only wheel index. Without it,
+# plain PyPI serves the much larger CUDA-enabled build (~2-3 GB) even if
+# you have no GPU. Safe to drop this line on a machine where you DO want
+# CUDA support.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# ── Core numerical / data ──────────────────────────────────────
+numpy==1.26.4
+pandas==3.0.5
+scipy==1.17.1
+joblib==1.5.3
+openpyxl==3.1.5          # reads Diagnostics.xlsx (metadata_agent.py)
+
+# ── Classical ML ────────────────────────────────────────────────
+scikit-learn==1.9.0
+
+# ── Deep learning (Imaging Agent: ResNet34 + attention, deep ensemble) ──
+torch==2.7.0
+torchvision==0.22.0
+
+# ── Image processing (preprocessing pipeline + Texture Agent) ──
+opencv-python==4.11.0.86
+scikit-image==0.26.0
+
+# ── Explainability ──────────────────────────────────────────────
+shap==0.49.1
+matplotlib==3.11.1
+
+# ── Optional LLM narrative layer (llm_narrative.py) ─────────────
+# Falls back to a deterministic template with no key set — see that
+# file's docstring for how to get a free Gemini or Groq API key.
+requests==2.34.2
+
+# ── Interactive interface ───────────────────────────────────────
+streamlit==1.61.1
